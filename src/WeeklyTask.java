@@ -19,14 +19,8 @@ public class WeeklyTask extends Task implements NextDayOfTask{
     }
 
     @Override
-    public String toString() {
-        System.out.println("\n" +  getId() + ") " + getName() +
-                "\n     Описание: " + getDescription() +
-                "\n     Дата первого выполнения: " + getDateOfTask().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
-                "\n     Время: " + getTimeOfTask() +
-                "\n     Тип: " + this.getType().getType() +
-                "\n     Частота выполнения: Еженедельно");
-        return null;
+    public String getTaskType() {
+        return "Еженедельная";
     }
 
     @Override

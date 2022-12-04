@@ -5,6 +5,7 @@ public class Diary {
 
     public Map<Integer, Task> diary = new HashMap<>();
 
+
     public Diary() {
     }
 
@@ -23,14 +24,25 @@ public class Diary {
     }
 
     public void deleteTaskById(Integer id){
-        diary.remove(id);
+        diary.get(id).setDeleted();
     }
 
     @Override
     public String toString() {
+        String str = "";
         for (Map.Entry<Integer, Task> entryTask : diary.entrySet() ){
-            System.out.println(entryTask.getValue());
+            if (!entryTask.getValue().isDeleted())
+                str += entryTask.getValue();
         }
-        return null;
+        return str;
+    }
+
+    public String printArchive(){
+        String str = "";
+        for (Map.Entry<Integer, Task> entryTask : diary.entrySet() ){
+            if (entryTask.getValue().isDeleted())
+                str += entryTask.getValue();
+        }
+        return str;
     }
 }

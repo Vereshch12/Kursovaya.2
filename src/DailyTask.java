@@ -18,15 +18,8 @@ public class DailyTask extends Task implements NextDayOfTask {
         return false;
     }
 
-    @Override
-    public String toString() {
-        System.out.println("\n" +  getId() + ") " + getName() +
-                "\n     Описание: " + getDescription() +
-                "\n     Дата первого выполнения: " + getDateOfTask().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
-                "\n     Время: " + getTimeOfTask() +
-                "\n     Тип: " + this.getType().getType() +
-                "\n     Частота выполнения: Ежедневно");
-        return null;
+    public String getTaskType() {
+        return "Ежедневная";
     }
 
     @Override

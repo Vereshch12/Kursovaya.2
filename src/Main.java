@@ -31,6 +31,9 @@ public class Main {
                         case 5:
                             getNextDayOfTask(scanner);
                             break;
+                        case 6:
+                            getArchive(scanner);
+                            break;
                         case 0:
                             break label;
                     }
@@ -45,8 +48,10 @@ public class Main {
     private static void inputTask(Scanner scanner) {
         System.out.print("\nВведите название задачи: ");
         String taskName = scanner.next();
+        if (taskName.isBlank() || taskName.isEmpty() || taskName == null) throw new IllegalArgumentException("Название не может быть пустым!");
         System.out.print("\nВведите описание задачи: ");
         String taskDescription = scanner.next();
+        if (taskDescription.isBlank() || taskDescription.isEmpty() || taskDescription == null) throw new IllegalArgumentException("Описание не может быть пустым!");
         System.out.print("\nВведите тип задачи (1 - рабочая, 0 - личная): ");
         int type = scanner.nextInt();
         Task.Type taskType;
@@ -67,7 +72,7 @@ public class Main {
             int menu = scanner.nextInt();
             switch (menu) {
                 case 1:
-                    diary1.addTaskToDiary(new Task(taskName, taskDescription, taskType, taskDate, taskTime));
+                    diary1.addTaskToDiary(new OneDayTask(taskName, taskDescription, taskType, taskDate, taskTime));
                     break;
                 case 2:
                     diary1.addTaskToDiary(new DailyTask(taskName, taskDescription, taskType, taskDate, taskTime));
@@ -103,13 +108,22 @@ public class Main {
         System.out.print("\nВведите id задания, которое вы хотите удалить: ");
         Integer id = scanner.nextInt();
         diary1.deleteTaskById(id);
-        System.out.println("\nЗадание (id " + id  + ")удалено!");
+        diary1.deleteTaskById(id);
+        System.out.println("\nЗадание (id " + id  + ")удалено (добавлено в архив)!");
         System.out.println("\nНажмите 0 для выхода в меню!");
         scanner.next();
     }
 
     private static void getAllTasks(Scanner scanner){
+        System.out.print("\nВСЕ ЗАДАНИЯ В ЕЖЕДНЕВНИКЕ:");
         System.out.println(diary1);
+        System.out.println("\nНажмите 0 для выхода в меню!");
+        scanner.next();
+    }
+
+    private static void getArchive(Scanner scanner){
+        System.out.print("\nАРХИВ:\n");
+//        System.out.println(archive1);
         System.out.println("\nНажмите 0 для выхода в меню!");
         scanner.next();
     }
@@ -146,6 +160,7 @@ public class Main {
                         3. Получить задачу на указанный день
                         4. Получить все задачи из ежедневника
                         5. Узнать следующую дату выполнения задания по id
+                        6. Просмотреть архив
                         0. Выход
                         """
         );
